@@ -1,1 +1,47 @@
-/* Main Style Sheet to be used by MeTube Project */
+html, body{
+	margin: 0px;
+	padding: 0px;
+	background-color: grey;
+}
+
+
+#headCont {
+	background-color: black;
+	padding-bottom: 30px;
+}
+
+
+#headData {
+	color: white;
+}
+
+
+#menuCont {
+	
+}
+
+
+#mainPageContent {
+	
+}
+
+
+#spotlightedVid {
+
+}
+
+
+#mediaPrev {
+
+}
+
+
+#footCont {
+	background-color: black;
+	color: white;
+	bottom: 0;
+	position:absolute;
+    	bottom:0;
+    	width:100%;
+    	height:40px;	
+}
