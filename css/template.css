@@ -7,18 +7,32 @@ html, body{
 
 #headCont {
 	background-color: black;
-	padding-bottom: 30px;
+	padding-top: 10px;
+	padding-bottom: 15px;
 }
 
 
 #headData {
-	color: white;
+	color:white;
+	font-size:20px;
 }
 
 
 #menuCont {
-	
-		
+	float: right;
+	padding-right: 10px;
+	color: white;
+	text-decoration-line: none;
+}
+
+
+#searchCont {
+	padding-left: 60px;
+}
+
+
+input[type=text] {
+	width:40%;
 }
 
 

@@ -1,6 +1,6 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/template.css" />
-	<title>MeTube - Home</title>
+	<title>MeTube - Registration</title>
 	<link rel="icon" href="" />
 	<meta charset="UTF-8">
 	<meta name="description" content="">
@@ -13,9 +13,9 @@
 
 	<header id="headCont">
 		<div id="headData">
-			<span id="logoCont"><a href="index.php">logo</a></span>
+			<span id="logoCont"> <a href="index.php">logo</a></span>
 			<span id="searchCont"> <input type="text" name="searchVal"><button type="button">Search</button></span>  
-			<a id="menuCont" href="register.php">Register</a> <a id="menuCont" href="upload.php">Upload</a>
+			<a id="menuCont" href="register.php">Register</a><a id="menuCont" href="upload.php">Upload</a>
 		</div>
 	</header>
 
