@@ -27,6 +27,7 @@
 			<tr id="mediaPrev">
 				<td>
 					Media preview section
+					testingtestingtesting
 				</td>
 			</tr>
 
