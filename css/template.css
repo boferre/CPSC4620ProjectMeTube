@@ -1,9 +1,14 @@
 html, body{
 	margin: 0px;
 	padding: 0px;
+	height: 100%;
 	background-color: grey;
 }
 
+#container {
+	min-height: 100%;
+	position: relative;
+}
 
 #headCont {
 	background-color: black;
@@ -33,21 +38,12 @@ html, body{
 
 input[type=text] {
 	width:40%;
+	border-radius: 25px;
 }
 
 
 #mainPageContent {
-	
-}
-
-
-#spotlightedVid {
-
-}
-
-
-#mediaPrev {
-
+	padding-bottom: 60px;
 }
 
 
@@ -56,7 +52,7 @@ input[type=text] {
 	color: white;
 	bottom: 0;
 	position:absolute;
-    	bottom:0;
-    	width:100%;
-    	height:40px;	
+    bottom:0;
+    width:100%;
+    height:40px;	
 }
