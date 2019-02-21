@@ -12,8 +12,10 @@ html, body{
 
 #headCont {
 	background-color: black;
-	padding-top: 10px;
-	padding-bottom: 15px;
+	position: absolute;
+	width: 100%;
+	padding-top: 2%;
+	padding-bottom: 2%;
 }
 
 
@@ -36,13 +38,14 @@ html, body{
 }
 
 
-input[type=text] {
+input[name="searchVal"] {
 	width:40%;
-	border-radius: 25px;
+	border-radius: 55px;
 }
 
 
 #mainPageContent {
+	padding-top: 80px;
 	padding-bottom: 60px;
 }
 
