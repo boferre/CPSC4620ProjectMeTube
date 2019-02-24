@@ -22,6 +22,7 @@
 		</div>
 	</header>
 
+<body>
 	<div id="mainPageContent">
 		<table>
 			<tr id="spotlightedVid">
@@ -52,7 +53,7 @@
 			</tr>
 		</table>
 	</div>
-
+</body>
 	<footer id="footCont">
 		other links and information
 	</footer>

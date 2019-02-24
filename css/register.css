@@ -1,29 +1,66 @@
-#mainPageContent {
+#mainPageContent {	
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 700px;
+  height: 250px;
+  background-color: #ccc;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  padding-top:25px;
+}
+
+.regTitle {
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.regCont {
 	padding-left: 5%;
-	padding-right: 5%;
-
+	padding-bottom: 1%;
 }
 
-table.regTable {
-	margin-left: auto;
-	margin-right: auto;
-	width: 80%
-
+#nameHead {
+	padding-right: 80px;
 }
 
-table {
-	border: 2px solid black;
+#emailHead {
+	padding-right: 110px;
 }
 
-input[name="fNameVal"], input[name="lNameVal"], input[name="passVal"], input[name="passConfVal"] {
-	width: 55%;
+#displayHead {
+	padding-right: 56px;
+}
+
+#passHead {
+	padding-right: 87px;
+}
+
+#secHead {
+	padding-right: 32px;
+}
+
+input[name="fName"], input[name="lName"], input[name="email"], input[name="dName"], input[name="password"], input[name="passwordComp"], input[name="secAnswer"] {
 	border-radius: 5px;
 }
 
-input[name="emailVal"] {
-	width: 100%;
+input[name="email"] {
+	width: 322px;
 }
 
-input[name="passVal"], input[name="passConfVal"] {
-	
-}	
+input[name="dName"] {
+}
+
+#submitCont {
+	padding-left: 65%;
+}
+
+#submitButton {
+	border-radius: 5px;
+	background-color: white;
+	padding: 5px;
+}
