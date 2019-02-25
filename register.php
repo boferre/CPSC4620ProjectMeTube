@@ -11,6 +11,16 @@
 	<meta name="author" content="">
 </head>
 
+<?php
+	$accountID = 0;
+	$username = '';
+	$displayname = '';
+	$Fname = '';
+	$Lname = '';
+	$secquestion = 0;
+	$secanswer = '';
+?>
+
 
 <html id="webPage">
 <div id="container">
@@ -25,6 +35,7 @@
 	<div id="mainPageContent">
 		<div class="regTitle" id="titleCont">Fill out the following information to register!</div>
 		<div id="infoCont">
+		
 			<div class="regCont" id="fullNameCont"><span class="heading" id="nameHead">Full Name</span> <input type="text" id="nameInput" name="fName"> <input type="text" id="nameInput" name="lName"></div>
 			<div class="regCont" id="emailCont"><span class="heading" id="emailHead">Email</span> <input type="text" id="emailInput" name="email"></div>
 			<div class="regCont" id="accName"><span class="heading" id="displayHead">Display Name</span> <input type="text" id="nameInput" name="dName"></div>
@@ -38,6 +49,7 @@
 				</select> <input type="text" id="secAnInput" name="secAnswer"> </div>
 			<div class="regCont" id="termsCont"><span class="heading" id="termsHead">Terms and Conditions</span> <input type="checkbox" name="confirmedTerms" value="yes"> I have read the terms and conditions </div>
 			<div class="regCont" id="submitCont"><button type="button" id="submitButton">Submit</button></div>
+		
 		</div>
 	</div>
 </body>

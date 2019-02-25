@@ -1,35 +1,29 @@
-
-<!DOCTYPE html>
-<html>
-<body>
+<!--The following function should only be used when the user wants to create an account.-->
 
 <?php
-$servername = "mysql1.cs.clemson.edu";
-$username = "PrjctMTb_kdsy";
-$password = "CPSC4620";
-$dbname = "ProjectMeTube_xvky";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+// Always include this file in order to connect to database
+include 'server.php';
 
-$sql = "SELECT accountID, username, displayname FROM account";
-$result = $conn->query($sql);
+// Needed variables;
+$accountID = 1;
+$username = 'admin';
+$displayname = 'test';
+$Fname = 'test';
+$Lname = 'test';
+$secquestion = 1;
+$secanswer = 'test';
 
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<br> id: ". $row["accountID"]. " - Name: ". $row["username"]. " " . $row["displayname"] . "<br>";
-    }
-} else {
-    echo "0 results";
-}
+//Check if account exist
 
+// Insert into
+$sql = "INSERT INTO account VALUES ('$accountID', '$username', '$displayname', '$Fname', '$Lname', '$secquestion', '$secanswer');";
+
+
+//echo $sql;	
+
+$conn->query($sql);
+
+// Always close the connection
 $conn->close();
 ?> 
-
-</body>
-</html>
