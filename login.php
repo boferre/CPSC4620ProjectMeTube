@@ -3,7 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/template.css" />
 	<link rel="stylesheet" type="text/css" href="css/register.css" />
-	<title>MeTube - Upload</title>
+	<title>MeTube - Log In</title>
 	<link rel="icon" href="" />
 	<meta charset="UTF-8">
 	<meta name="description" content="">
@@ -12,7 +12,7 @@
 </head>
 
 <?php
-	include 'functions/uploadFunction.php';
+	include 'functions/loginFunctions.php';
 
 ?>
 
@@ -36,18 +36,19 @@
 	
 <body>
 	<div id="mainPageContent">
-		<div class="Title" id="titleCont">Media Upload</div>
-		<div class="subTitle" id="titleCont">If you've never uploaded a video to MeTube then <a href="">click here</a> for the basic rundown.</div>
+		<div class="Title" id="titleCont">Welcome to MeTube!</div>
+		<div class="subTitle" id="titleCont">If you have an account, please sign in below.</div>
+		<div class="subTitle" id="titleCont">If you wish to register an account, <a href="register.php">click here</a>.</div>
 		<div id="infoCont">
 			<form method="post">
-				<div class="regCont" id="titleCont">
-					<span class="heading" id="">Title</span> 
-						<input type="text" id="vidTitle" name="vidTitle" placeholder="Enter the media title" maxlength="125">  
+				<div class="regCont" id="loginCont">
+					<span class="heading" id="nameHead">Email</span> 
+						<input type="text" id="emailInput" name="email" placeholder="Enter Your Email" maxlength="35">  
 				</div>
 				
 				<div class="regCont" id="passCont">
-					<span class="heading" id="">File to Upload</span> 
-						<input type="file" name="fileToUpload" id="fileToUpload">
+					<span class="heading" id="passHead">Password</span> 
+						<input type="text" id="passInput" name="password" placeholder="Enter Password">
 				</div>
 				
 				<div class="regCont" id="submitCont">
@@ -57,8 +58,7 @@
 			
 			<?php
 				if (isset($_POST['submit'])) {
-					echo "starting";
-					upload();
+					login();
 				}
 			?>
 			

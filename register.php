@@ -13,14 +13,6 @@
 
 <?php
 	include 'functions/registerFunction.php';
-
-	$accountID = 0;
-	$username = '';
-	$displayname = '';
-	$Fname = '';
-	$Lname = '';
-	$secquestion = 0;
-	$secanswer = '';
 ?>
 
 
@@ -30,7 +22,14 @@
 		<div id="headData">
 			<span id="logoCont"><a href="index.php">logo</a></span>
 			<span id="searchCont"> <input type="text" id="searchBar"  name="searchVal"><button type="button">Search</button></span>  
-			<a id="menuCont" href="register.php">Register</a> <a id="menuCont" href="upload.php">Upload</a>
+			<?php
+				session_start();
+				if (isset($_SESSION['accountID'])) {
+					echo '<a id="menuCont" href="functions/logoutFunction.php">Log Out</a> <a id="menuCont" href="upload.php">Upload</a> <a id="menuCont">Welcome, ' . $_SESSION["displayname"] . ': </a>' ;
+				} else {
+					echo '<a id="menuCont" href="login.php">Log In</a> <a id="menuCont" href="register.php">Register</a> <a id="menuCont" href="upload.php">Upload</a>';
+				}
+			?>
 		</div>
 	</header>
 <body>
@@ -40,12 +39,12 @@
 		
 		<form method="post">
 			<div class="regCont" id="fullNameCont"><span class="heading" id="nameHead">Full Name</span> 
-				<input type="text" id="nameInput" name="fName" placeholder="Enter First Name"> 
-				<input type="text" id="nameInput" name="lName" placeholder="Enter Last Name"></div>
+				<input type="text" id="nameInput" name="fName" placeholder="Enter First Name" value="<?php displayVar(1); ?>" maxlength="25"> 
+				<input type="text" id="nameInput" name="lName" placeholder="Enter Last Name" value="<?php displayVar(2); ?>" maxlength="25"></div>
 			<div class="regCont" id="emailCont"><span class="heading" id="emailHead">Email</span> 
-				<input type="text" id="emailInput" name="email" placeholder="Enter Email"></div>
+				<input type="text" id="emailInput" name="email" placeholder="Enter Email" value="<?php displayVar(3); ?>" maxlength="35"></div>
 			<div class="regCont" id="accName"><span class="heading" id="displayHead">Display Name</span> 
-				<input type="text" id="nameInput" name="dName" placeholder="Enter Display Name"></div>
+				<input type="text" id="nameInput" name="dName" placeholder="Enter Display Name" value="<?php displayVar(4); ?>" maxlength="25"></div>
 			<div class="regCont" id="passCont"><span class="heading" id="passHead">Password</span> 
 				<input type="text" id="passInput" name="password" placeholder="Enter Password"> 
 				<input type="text" id="passInput" name="passwordComp" placeholder="Confirm Password"></div>
@@ -55,7 +54,7 @@
 				  <option value="2">What was the name of the steet you lived on?</option>
 				  <option value="3">What was the name of your best friend?</option>
 				  <option value="4">What was the name of your high school?</option>
-				</select> <input type="text" id="secAnInput" name="secAnswer"> </div>
+				</select> <input type="text" id="secAnInput" name="secAnswer" value="<?php displayVar(5); ?>" maxlength="500"> </div>
 			<div class="regCont" id="termsCont"><span class="heading" id="termsHead">Terms and Conditions</span> <input type="checkbox" name="confirmedTerms" value="yes"> I have read the terms and conditions </div>
 			<div class="regCont" id="submitCont">
 				<input type="submit" name="submit" value="Submit" id="submitButton">
