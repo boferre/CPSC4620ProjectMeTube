@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/template.css" />
 	<link rel="stylesheet" type="text/css" href="css/slider.css" />
+	<script type="text/javascript" src="scripts/dropdown.js"></script>
 	<title>MeTube - Home</title>
 	<link rel="icon" href="" />
 	<meta charset="UTF-8">
@@ -10,6 +11,10 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 </head>
+
+<?php
+	include 'functions/mediaDisplayFunctions.php';
+?>
 
 
 <html id="webPage">
@@ -21,14 +26,21 @@
 			<?php
 				session_start();
 				if (isset($_SESSION['accountID'])) {
-					echo '<a id="menuCont" href="functions/logoutFunction.php">Log Out</a> <a id="menuCont" href="upload.php">Upload</a> <a id="menuCont">Welcome, ' . $_SESSION["displayname"] . ': </a>' ;
+					echo '<div class="dropdown">
+							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
+							<div  id="myDropdown" class="dropdown-content">
+								<a href="#">View Account</a>
+								<a href="upload.php">Upload</a>
+								<a href="functions/logoutFunction.php">Log Out</a>
+							</div>
+						</div>';
 				} else {
-					echo '<a id="menuCont" href="login.php">Log In</a> <a id="menuCont" href="register.php">Register</a> <a id="menuCont" href="upload.php">Upload</a>';
+					echo '<a id="menuCont" href="login.php">Log In</a> <a id="menuCont" href="register.php">Register</a>';
 				}
 			?>
 		</div>
 	</header>
-
+	
 <body>
 	<div id="mainPageContent">
 		<table>
@@ -41,21 +53,17 @@
 			
 			<tr id="mediaPrev">
 				<td>
-		
-					<div class="carousel js-carousel">
-						<div class="item">test</div>
-						<div class="item">test</div>
-						<div class="item">test</div>
-						<div class="item">test</div>
-						<div class="item">test</div>
+					<div class="videoList">
+						<?php displayList('', 'uploaded', 0);?>
 					</div>
-					
 				</td>
 			</tr>
 
 			<tr id="mediaPrev">
 				<td>
-					Media Preview Section
+					<div class="videoList">
+						<?php displayList('Most viewed', 'views', 0);?>
+					</div>
 				</td>
 			</tr>
 		</table>
