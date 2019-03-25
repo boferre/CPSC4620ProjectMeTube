@@ -18,7 +18,8 @@
 		
 		if ($result->num_rows > 0) {
 			while(($row = $result->fetch_assoc()) && ($displayNumber <= 20)) {
-				echo "<a href='http://webapp.cs.clemson.edu/~boferre/metube/media.php?media=" . $row["mediaID"] . "'><div class='item' style='background-image: url(" . $row["link"] . "); background-repeat: no-repeat; background-size: 100% 100%;'><span class='mediaTitle'>" . $row["title"] . "</span></div></a>";
+				$imageLink = $row["link"];
+				echo "<a href='http://webapp.cs.clemson.edu/~boferre/metube/media.php?media=" . $row["mediaID"] . "'><div class='item' style='background-image: url(" . $imageLink . "); background-repeat: no-repeat; background-size: 100% 100%;'><span class='mediaTitle'>" . $row["title"] . "</span></div></a>";
 				$displayNumber++;
 			}
 		} else {

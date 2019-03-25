@@ -47,24 +47,22 @@
 		<div class="Title" id="titleCont">Media Upload</div>
 		<div class="subTitle" id="titleCont">If you've never uploaded a video to MeTube then <a href="">click here</a> for the basic rundown.</div>
 		<div id="infoCont">
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
 				<div class="regCont" id="titleCont">
 					<span class="heading" id="">Title</span> 
 						<input type="text" id="vidTitle" name="vidTitle" placeholder="Enter the media title" maxlength="125">  
 				</div>
 				
 				<div class="regCont" id="passCont">
-					<form action="functions/uploadFunction.php" method="post" enctype="multipart/form-data">
+					
 						Select image to upload:
-						<input type="file" name="fileToUpload" id="fileToUpload">
+						<input type="file" name="file" id="file">
 						<input type="submit" value="Upload" name="submit">
-					</form>
 				</div>
 			</form>
 			
 			<?php
 				if (isset($_POST['submit'])) {
-					echo "upload1";
 					upload();
 				}
 			?>
