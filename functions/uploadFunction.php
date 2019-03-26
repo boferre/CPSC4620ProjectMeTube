@@ -10,9 +10,15 @@ function uploadIntoDatabase($dir, $user) {
 	$mediaID = $row['COUNT(mediaID)'] + 1;
 	$title = mysqli_real_escape_string($conn, $_REQUEST['vidTitle']);
 	$link = $dir;
+	$desc = mysqli_real_escape_string($conn, $_REQUEST['description']);
+	$key = mysqli_real_escape_string($conn, $_REQUEST['keywords']);
+	$cat = mysqli_real_escape_string($conn, $_REQUEST['category']);
+	$type = pathinfo($dir);
+	$type = $type['extension'];
+	
 	
 	// Insert into
-	$sql = "INSERT INTO media VALUES ('$mediaID', '$user', '$link', '$title', 'description', CURDATE(), 0, 0);";
+	$sql = "INSERT INTO media VALUES ('$mediaID', '$user', '$link', '$title', '$desc', CURDATE(), 0, '$key', '$cat', '$type');";
 	//echo $sql;	
 	$conn->query($sql);
 	

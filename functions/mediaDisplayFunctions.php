@@ -32,6 +32,26 @@
 	function displayPlayer($mediaID) {
 		// Always include this file in order to connect to database
 		include 'server.php';
+		
+		$sql = "SELECT mediaID, accountID, title, link, uploaded, views, category, keywords, description, type FROM media WHERE mediaID=$mediaID ;";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			while(($row = $result->fetch_assoc())) {
+				$imageLink = $row["link"];
+				if (strtolower($row["type"]) == "jpg" || strtolower($row["type"]) == "png" || strtolower($row["type"]) == "gif") {
+					echo "<img id='mediaCont' src=". $imageLink .">";
+				} elseif (strtolower($row["type"]) == "mp4" || strtolower($row["type"]) == "webm" || strtolower($row["type"]) == "ogg") {
+					echo "
+						<video controls idth='640' height='360'>
+							<source src='http://webapp.cs.clemson.edu/~boferre/metube/" . $imageLink .  "' type='video/mp4'>
+						</video>
+					";
+				}
+			}
+		} else {
+			echo "No media found!";
+		}
 	}
 
 ?>

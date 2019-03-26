@@ -50,13 +50,41 @@
 			<form method="post" enctype="multipart/form-data">
 				<div class="regCont" id="titleCont">
 					<span class="heading" id="">Title</span> 
-						<input type="text" id="vidTitle" name="vidTitle" placeholder="Enter the media title" maxlength="125">  
+						<input type="text" id="vidTitle" name="vidTitle" placeholder="Enter the media title" maxlength="50" size="50">
+					<br>
+					<span class="heading" id="">Description</span> 
+						<input type="text" id="vidDesc" name="description" placeholder="Enter your description here" maxlength="250" size="50">
+					<br>
+					<span class="heading" id="">Keywords</span> 
+						<input type="text" id="vidKey" name="keywords" placeholder="Place a space between each keyword" maxlength="500" size="50">
+					<br>
+					<span class="heading" id="">Category</span>
+						<select name="category">
+							<option value="Auto & Vehicles">Auto & Vehicles</option>
+							<option value="Beauty & Fashion">Beauty & Fashion</option>
+							<option value="Comedy">Comedy</option>
+							<option value="Education">Education</option>
+							<option value="Entertainment">Entertainment</option>
+							<option value="Family">Family</option>
+							<option value="Food">Food</option>
+							<option value="Gaming">Gaming</option>
+							<option value="How-To">How-To</option>
+							<option value="Music">Music</option>
+							<option value="News & Politics">News & Politics</option>
+							<option value="Nonprofit & Activism">Nonprofit & Activism</option>
+							<option value="People">People</option>
+							<option value="Pets">Pets</option>
+							<option value="Science">Science</option>
+							<option value="Sports">Sports</option>
+							<option value="Travel">Travel</option>
+						</select>
 				</div>
 				
 				<div class="regCont" id="passCont">
 					
 						Select image to upload:
 						<input type="file" name="file" id="file">
+						<br>
 						<input type="submit" value="Upload" name="submit">
 				</div>
 			</form>

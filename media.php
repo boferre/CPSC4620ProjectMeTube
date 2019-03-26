@@ -42,7 +42,12 @@
 	
 <body>
 	<div id="mainPageContent">
-		
+		<div id="mediaContentContainer">
+			<?php
+				$mediaId = $_GET["media"];
+				displayPlayer($mediaId);
+			?>
+		</div>
 	</div>
 </body>
 
