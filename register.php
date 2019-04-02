@@ -14,6 +14,7 @@
 
 <?php
 	include 'functions/registerFunction.php';
+	include 'functions/searchFunction.php';
 ?>
 
 
@@ -22,7 +23,17 @@
 	<header id="headCont">
 		<div id="headData">
 			<span id="logoCont"><a href="index.php">logo</a></span>
-			<span id="searchCont"> <input type="text" id="searchBar"  name="searchVal"><button type="button">Search</button></span>
+			<span id="searchCont">
+				<form id="searchForm" method="post">
+					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Search" id="searchButton">
+				</form>
+				<?php
+					if (isset($_POST['search'])) {
+						$result = $_POST['searchVal'];
+						search($result);
+					}
+				?>
+			</span>
 			<?php
 				session_start();
 				if (isset($_SESSION['accountID'])) {

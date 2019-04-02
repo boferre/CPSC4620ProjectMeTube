@@ -39,6 +39,10 @@ html, body{
 	padding-left: 60px;
 }
 
+#searchForm {
+	display: inline;
+}
+
 
 input[name="searchVal"] {
 	width:40%;
