@@ -75,8 +75,8 @@
 				<tr>
 					<td>
 						<label id="categoryHeader">Categories</label><br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Auto&Vehicles">Auto & Vehicles</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Beauty&Fashion">Beauty & Fashion</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=AutoVehicles">Auto & Vehicles</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=BeautyFashion">Beauty & Fashion</a> <br>
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Comedy">Comedy</a> <br>
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Education">Education</a> <br>
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Entertainment">Entertainment</a> <br>
@@ -85,13 +85,13 @@
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Gaming">Gaming</a> <br>
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=How-To">How-To</a> <br>
 						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Music">Music</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">News & Politics</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">Nonprofit & Activism</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">People</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">Pets</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">Science</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">Sports</a> <br>
-						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?searched=">Travel</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=NewsPolitics">News & Politics</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Nonprofit&Activism">Nonprofit & Activism</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=People">People</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Pets">Pets</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Science">Science</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Sports">Sports</a> <br>
+						<a id="categoryHead" href="http://webapp.cs.clemson.edu/~boferre/metube/browse.php?cat=Travel">Travel</a> <br>
 					</td>
 				</tr>
 			</table>
@@ -101,6 +101,9 @@
 			<?php
 				if(isset($_GET['searched']) && !empty($_GET['searched'])) {
 					displayResults($_GET['searched'], 0);
+				} elseif (isset($_GET['cat']) && !empty($_GET['cat'])) {
+					echo $_GET['cat'];
+					displayList($_GET['cat'], 'uploaded', 0, 1);
 				} else {
 					displayList('', 'uploaded', 0, 0);
 				}

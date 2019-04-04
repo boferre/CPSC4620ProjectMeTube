@@ -26,7 +26,7 @@
 			<span id="logoCont"><a href="index.php">logo</a></span>
 			<span id="searchCont"> 
 				<form id="searchForm" method="post">
-					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Search" id="searchButton">
+					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Browse" id="searchButton">
 				</form>
 				<?php
 					if (isset($_POST['search'])) {
@@ -41,7 +41,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="#">View Account</a>
+								<a href="account.php">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -71,8 +71,8 @@
 					<br>
 					<span class="heading" id="">Category</span>
 						<select name="category">
-							<option value="Auto & Vehicles">Auto & Vehicles</option>
-							<option value="Beauty & Fashion">Beauty & Fashion</option>
+							<option value="AutoVehicles">Auto & Vehicles</option>
+							<option value="BeautyFashion">Beauty & Fashion</option>
 							<option value="Comedy">Comedy</option>
 							<option value="Education">Education</option>
 							<option value="Entertainment">Entertainment</option>
@@ -81,14 +81,16 @@
 							<option value="Gaming">Gaming</option>
 							<option value="How-To">How-To</option>
 							<option value="Music">Music</option>
-							<option value="News & Politics">News & Politics</option>
-							<option value="Nonprofit & Activism">Nonprofit & Activism</option>
+							<option value="NewsPolitics">News & Politics</option>
+							<option value="NonprofitActivism">Nonprofit & Activism</option>
 							<option value="People">People</option>
 							<option value="Pets">Pets</option>
 							<option value="Science">Science</option>
 							<option value="Sports">Sports</option>
 							<option value="Travel">Travel</option>
 						</select>
+					<br>
+					<span class="heading" id="">Enable Comments</span><input type="radio" name="comms" value="1">Yes <input type="radio" name="comms" value="0"> No<br>
 				</div>
 				
 				<div class="regCont" id="passCont">
@@ -109,9 +111,5 @@
 		</div>
 	</div>
 </body>
-
-	<footer id="footCont">
-		other links and information
-	</footer>
 </div>
 </html>

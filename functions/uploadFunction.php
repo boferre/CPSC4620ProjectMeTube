@@ -13,12 +13,14 @@ function uploadIntoDatabase($dir, $user) {
 	$desc = mysqli_real_escape_string($conn, $_REQUEST['description']);
 	$key = mysqli_real_escape_string($conn, $_REQUEST['keywords']);
 	$cat = mysqli_real_escape_string($conn, $_REQUEST['category']);
+	$comm = mysqli_real_escape_string($conn, $_REQUEST['comms']);
 	$type = pathinfo($dir);
 	$type = $type['extension'];
+	$type = strtolower($type);
 	
 	
 	// Insert into
-	$sql = "INSERT INTO media VALUES ('$mediaID', '$user', '$link', '$title', '$desc', CURDATE(), 0, '$key', '$cat', '$type');";
+	$sql = "INSERT INTO media VALUES ('$mediaID', '$user', '$link', '$title', '$desc', CURDATE(), 0, '$key', '$cat', '$type', $comm);";
 	//echo $sql;	
 	$conn->query($sql);
 	
@@ -42,27 +44,31 @@ function upload(){
 		mkdir($dirfile, 0755);
 
 
-		if($_FILES["file"]["error"] > 0 )
-		{ $result=$_FILES["file"]["error"];} //error from 1-4
-		else
-		{
+		if($_FILES["file"]["error"] > 0 ){ 
+			$result=$_FILES["file"]["error"];
+		} else {
 		  $upfile = $dirfile.urlencode($_FILES["file"]["name"]);
 		  
-		  if(file_exists($upfile))
-		  {
-				$result= 5;
-		  }
-		  else{
-				if(is_uploaded_file($_FILES["file"]["tmp_name"]))
-				{
-					if(!move_uploaded_file($_FILES["file"]["tmp_name"],$upfile))
-					{
-						$result= 6; //Failed to move file from temporary directory
+		  if(file_exists($upfile)) {
+				echo "<span class='warning' id='warning'>This file already exists!</span>";
+				return;
+		  } else{
+				if(is_uploaded_file($_FILES["file"]["tmp_name"])) {
+					$type = pathinfo($upfile);
+					$type = $type['extension'];
+					$type = strtolower($type);
+					if ($type != 'jpg' || $type != 'mp4' || $type != 'png' || $type != 'gif' || $type != 'ogg' || $type != 'webm' ) {
+						echo "<span class='warning' id='warning'>Cannot upload that file format!</span>";
+						return;
 					}
-				}
-				else  
-				{
-						$result=7; //upload file failed
+					
+					if(!move_uploaded_file($_FILES["file"]["tmp_name"],$upfile)) {
+						echo "<span class='warning' id='warning'>Failed to move file!</span>";
+						return;
+					}
+				} else {
+						echo "<span class='warning' id='warning'>Uploading file failed!</span>";
+						return;
 				}
 			}
 		}

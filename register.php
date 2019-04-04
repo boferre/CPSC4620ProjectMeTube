@@ -25,7 +25,7 @@
 			<span id="logoCont"><a href="index.php">logo</a></span>
 			<span id="searchCont">
 				<form id="searchForm" method="post">
-					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Search" id="searchButton">
+					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Browse" id="searchButton">
 				</form>
 				<?php
 					if (isset($_POST['search'])) {
@@ -40,7 +40,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="#">View Account</a>
+								<a href="account.php">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -91,8 +91,5 @@
 		</div>
 	</div>
 </body>
-	<footer id="footCont">
-		other links and information
-	</footer>
 </div>
 </html>

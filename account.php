@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="css/template.css" />
 	<link rel="stylesheet" type="text/css" href="css/slider.css" />
 	<script type="text/javascript" src="scripts/dropdown.js"></script>
-	<title>MeTube - Browse</title>
+	<title>MeTube - Account</title>
 	<link rel="icon" href="" />
 	<meta charset="UTF-8">
 	<meta name="description" content="">
@@ -25,7 +25,7 @@
 			<span id="logoCont"><a href="index.php">logo</a></span>
 			<span id="searchCont"> 
 				<form id="searchForm" method="post">
-					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Search" id="searchButton">
+					<input type="text" id="searchBar"  name="searchVal"><input type="submit" name="search" value="Browse" id="searchButton">
 				</form>
 				<?php
 					if (isset($_POST['search'])) {
@@ -40,7 +40,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="account.php">View Account</a>
+								<a href="account.php?id=' . $_SESSION["accountID"] . '">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -54,7 +54,26 @@
 	
 <body>
 	<div id="mainPageContent">
-		
+		<div id="selector">
+			<table>
+				<tr>
+					<td>
+						<a id="sidebarHead" href="index.php">Home</a> <br>
+						
+						<?php
+							if (isset($_SESSION['accountID']) && $_SESSION['accountID'] == $_GET['id']) {
+								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=vids&id='. $_GET['id'] .'">Your Videos</a> <br>';
+								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=sub&id='. $_GET['id'] .'">Your Subscriptions</a> <br>';
+								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=play&id='. $_GET['id'] .'">Your Playlists</a> <br>';
+								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=msg&id='. $_GET['id'] .'">Messages</a> <br>';
+								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=set&id='. $_GET['id'] .'">Account Settings</a> <br>';
+							}
+						?>
+						
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 

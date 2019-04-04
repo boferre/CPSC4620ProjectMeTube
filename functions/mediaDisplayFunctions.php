@@ -10,7 +10,7 @@
 		// Determine our query statement
 		// Display based on order
 		if ($type == 0) {
-			$sql = "SELECT mediaID, title, link, uploaded, views, category, comenabled FROM media ORDER BY $data;";
+			$sql = "SELECT mediaID, title, link, uploaded, views, category, type, comenabled FROM media ORDER BY $data;";
 			if ($category == '') {
 				echo '<div class="contentTitle">New Videos</div>';
 			} else {
@@ -18,10 +18,10 @@
 			}
 		// Display based on category
 		} elseif ($type == 1) {
-			$sql = "SELECT mediaID, title, link, uploaded, views, category, comenabled FROM media ORDER BY $data;";
+			$sql = "SELECT mediaID, title, link, uploaded, views, type, category, comenabled FROM media WHERE category='$category';";
 		// Display based on Title
 		} elseif ($type == 2) {
-			$sql = "SELECT mediaID, title, link, uploaded, views, category, comenabled FROM media WHERE title='$data';";
+			$sql = "SELECT mediaID, title, link, uploaded, views, category, type, comenabled FROM media WHERE title='$data';";
 		// Display based on Account
 		} elseif ($type == 3) {
 			$acc = 0;
@@ -41,7 +41,7 @@
 			return;
 		// Display based on keywords
 		} elseif ($type == 4) {
-			$sql = "SELECT mediaID, title, link, uploaded, views, category, comenabled FROM media WHERE keywords LIKE '%$data%' ;";
+			$sql = "SELECT mediaID, title, link, uploaded, views, category, type, comenabled FROM media WHERE keywords LIKE '%$data%' ;";
 		} else {
 			echo "No given type.";
 			return;
@@ -52,8 +52,14 @@
 		if ($result->num_rows > 0) {
 			echo "<div id='mediaResultCont'>";
 			while(($row = $result->fetch_assoc())) {
-				$imageLink = $row["link"];
+				
+				if ($row["type"] == 'mp4' || $row["type"] == 'webm' || $row["type"] == 'ogg') {
+					$imageLink = $row["link"];
+				echo "<a href='http://webapp.cs.clemson.edu/~boferre/metube/media.php?media=" . $row["mediaID"] . "&com=" . $row["comenabled"] ."'><div class='item' style='background-image: url(media/videoplaceholder.jpg); background-repeat: no-repeat; background-size: 100% 100%;'><span class='mediaTitle'>" . $row["title"] . "</span></div></a>";
+				} else {
+					$imageLink = $row["link"];
 				echo "<a href='http://webapp.cs.clemson.edu/~boferre/metube/media.php?media=" . $row["mediaID"] . "&com=" . $row["comenabled"] ."'><div class='item' style='background-image: url(" . $imageLink . "); background-repeat: no-repeat; background-size: 100% 100%;'><span class='mediaTitle'>" . $row["title"] . "</span></div></a>";
+				}
 				$displayNumber++;
 			}
 			echo "</div>";
