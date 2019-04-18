@@ -41,7 +41,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="account.php">View Account</a>
+								<a href="account.php?id=' . $_SESSION["accountID"] . '">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -67,7 +67,7 @@
 				
 				<div class="regCont" id="passCont">
 					<span class="heading" id="passHead">Password</span> 
-						<input type="text" id="passInput" name="password" placeholder="Enter Password">
+						<input type="password" id="passInput" name="password" placeholder="Enter Password">
 				</div>
 				
 				<div class="regCont" id="submitCont">

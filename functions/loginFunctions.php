@@ -12,15 +12,16 @@ function check() {
 }
 
 
-function unhash() {
+function hashuser($value) {
+	$hashedVariable = md5($value);
 	
+	return $hashedVariable;
 }
 
 
 function login() {
 	// Always include this file in order to connect to database
 	include 'server.php';
-	//echo 'Logging in now';
 	
 	// Check for garbage
 	if (check()) {
@@ -31,8 +32,7 @@ function login() {
 	$username = mysqli_real_escape_string($conn, $_REQUEST['email']);
 	$password = mysqli_real_escape_string($conn, $_REQUEST['password']);
 	
-	// Unhash account
-	unhash();
+	$username = hashuser($username.$password);
 	
 	// Get information.
 	$sql = "SELECT accountID, displayname FROM account WHERE username='$username'";

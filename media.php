@@ -14,6 +14,8 @@
 <?php
 	include 'functions/mediaDisplayFunctions.php';
 	include 'functions/searchFunction.php';
+	include 'functions/accountManagementFunctions.php';
+	chmod('/uploads/*', 0755);
 ?>
 
 
@@ -30,6 +32,7 @@
 					if (isset($_POST['search'])) {
 						$result = $_POST['searchVal'];
 						search($result);
+						unset($_POST['search']);
 					}
 				?>
 			</span>
@@ -39,7 +42,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="account.php">View Account</a>
+								<a href="account.php?id=' . $_SESSION["accountID"] . '">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -57,35 +60,39 @@
 			<?php
 				$mediaId = $_GET["media"];
 				displayPlayer($mediaId);
+				addView($mediaId);
+				if (isset($_POST['subscribe'])) {
+					subscribe($_POST['idLogged']);
+					unset($_POST['subscribe']);
+				}
 			?>
 		</div>
 		<div id="commentSectionContainer">
 			<?php
-			
-				$com = $_GET["com"];
-				if (isset($_SESSION['accountID']) AND $com == 1) {
+				if (isset($_SESSION['accountID']) AND checkComs($mediaId) == 1) {
 					echo "
 						<form method='post'>
 						  <textarea name='comment' rows='5' cols='50'></textarea>
 						  <br>
-						  <input type='submit' name='submit' value='Add Comment'>
+						  <input type='submit' name='addComment' value='Add Comment'>
 						</form>
 					";
 				}
 				
 				
-				if (isset($_POST['submit'])) {
-					addComment($mediaId, $_SESSION['accountID'], $com);
+				if (isset($_POST['addComment'])) {
+					addComment($mediaId, $_SESSION['accountID']);
+					unset($_POST['addComment']);
 				}
 			
-			if ($com == 1) {
+			if (checkComs($mediaId) == 1) {
 			echo '
 				<div id="commentTitleHeader">
 					Comments
 				</div>
 			';
 			}
-				displayComments($mediaId, $com);
+				displayComments($mediaId);
 			?>
 		</div>
 	</div>

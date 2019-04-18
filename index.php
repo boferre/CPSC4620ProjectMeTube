@@ -40,7 +40,7 @@
 					echo '<div class="dropdown">
 							<button onclick="myFunction()" class="dropbtn">' . $_SESSION["displayname"] . '</button>
 							<div  id="myDropdown" class="dropdown-content">
-								<a href="account.php">View Account</a>
+								<a href="account.php?id=' . $_SESSION["accountID"] . '">View Account</a>
 								<a href="upload.php">Upload</a>
 								<a href="functions/logoutFunction.php">Log Out</a>
 							</div>
@@ -55,6 +55,18 @@
 <body>
 	<div id="mainPageContent">
 		<table>
+		
+			<tr id="mediaPrev">
+				<td>
+					<div class="videoList">
+						<?php 
+							if (isset($_SESSION['accountID'])) {
+								displaySubVideos(); 	
+							}
+						?>
+					</div>
+				</td>
+			</tr>
 			
 			<tr id="mediaPrev">
 				<td>

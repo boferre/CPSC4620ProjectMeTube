@@ -2,8 +2,10 @@ html, body{
 	margin: 0px;
 	padding: 0px;
 	height: 100%;
-	background-color: grey;
-	position: relative
+	background-color: #121212;
+	position: relative;
+	color: white;
+	overflow: auto;
 }
 
 #container {
@@ -11,10 +13,15 @@ html, body{
 	position: relative;
 }
 
+
+/*
+	Header Related Styling
+*/
+
 #headCont {
   	position: fixed;
   	top: 0;
-	background-color: black;
+	background-color: #272727;
 	width: 100%;
 	padding-top: 5px;
 	padding-bottom: 10px;
@@ -22,7 +29,6 @@ html, body{
 
 
 #headData {
-	color:white;
 	font-size:20px;
 }
 
@@ -32,6 +38,17 @@ html, body{
 	padding-right: 10px;
 	color: white;
 	text-decoration-line: none;
+}
+
+/*
+	Search Related Styling
+*/
+
+#searchButton {
+	background-color: #373737;
+	border: 0;
+	color: white;
+	font-size: 15px;
 }
 
 
@@ -46,30 +63,158 @@ html, body{
 
 input[name="searchVal"] {
 	width:40%;
-	border-radius: 55px;
 }
 
 
+
+/*
+	Page content Related Styling
+*/
 #mainPageContent {
 	padding-top: 80px;
 	padding-bottom: 60px;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 
-#footCont {
-	background-color: black;
+
+
+
+/*
+	Media Related Styling
+*/
+#mediaContentContainer {
+	float: left;
+}
+
+#mediaResultCont {
+	display: inline-block;
+}
+
+#commentSectionContainer {
+	 margin-left: 15%;
+	 padding-top: 2.7%;
+}
+
+
+#mediaTitle, #heading, .contentTitle, #commentTitleHeader, #Header {
+	text-decoration: underline;
+	text-transform: uppercase;
+	font-size: 150%;
+}
+
+#subHead {
+	font-size: 125%;
+}
+
+
+#mediaInfoUploader{
+	font-size: 120%;
+}
+
+
+#mediaCont {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+#mediaImage {
+	width: 720px;
+	height: 460px;
+}
+
+
+#mediaInfoCont {
+	background-color: #272727;
+	width: 720px;
+}
+
+
+#alert {
+	font-size: 125%;
+}
+
+
+.mediaTitle {
+	text-decoration: none;
 	color: white;
-	bottom: 0;
-	position:absolute;
-    width:100%;
-    height:40px;	
+	font-weight: bold;
+	background-color: #272727;
+}
+
+
+.deleteMedia {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	background-color: #272727;
+}
+
+
+/*
+	Account Related Styling
+*/
+#categoryHeader {
+	font-size: 130%;
+	text-decoration: underline;
+	
+}
+
+
+#selector {
+	height: 100%; /* Full-height: remove this if you want "auto" height */
+	width: 160px; /* Set the width of the sidebar */
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	z-index: 0; /* Stay on top */
+	top: 1; /* Stay at the top */
+	left: 0;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 20px;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-bottom: 100%;
+	float: left;
+	background-color: #272727;
+	
+}
+
+
+#selector a {
+	text-decoration: none;
+	color: white;
+	font-size: 110%;
+	
+}
+
+
+#selector a:hover {
+	color: blue;
+}
+
+
+#accountContent, #resultsCont {
+	top: 1;
+	left: 1;
+	z-index: 0;
+	padding-left: 165px;
+}
+
+
+#alert {
+	
+}
+
+#playlistCont {
+	padding-bottom: 20px;
 }
 
 
 /*Drop down styling is based on https://www.w3schools.com/howto/howto_css_dropdown.asp */
 
 .dropbtn {
-  background-color: black;
+  background-color: #272727;
   color: white;
   padding: 16px;
   font-size: 20px;
@@ -95,7 +240,7 @@ input[name="searchVal"] {
 }
 
 .dropdown-content a {
-  color: black;
+  color: #272727;
   padding: 12px 16px;
   text-decoration: none;
   display: block;

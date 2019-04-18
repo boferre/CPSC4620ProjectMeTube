@@ -15,6 +15,7 @@
 <?php
 	include 'functions/mediaDisplayFunctions.php';
 	include 'functions/searchFunction.php';
+	include 'functions/accountManagementFunctions.php';
 ?>
 
 
@@ -62,11 +63,11 @@
 						
 						<?php
 							if (isset($_SESSION['accountID']) && $_SESSION['accountID'] == $_GET['id']) {
-								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=vids&id='. $_GET['id'] .'">Your Videos</a> <br>';
-								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=sub&id='. $_GET['id'] .'">Your Subscriptions</a> <br>';
-								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=play&id='. $_GET['id'] .'">Your Playlists</a> <br>';
-								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=msg&id='. $_GET['id'] .'">Messages</a> <br>';
-								echo '<a id="sidebarHead" href="http://webapp.cs.clemson.edu/~boferre/metube/account.php?section=set&id='. $_GET['id'] .'">Account Settings</a> <br>';
+								echo '<a id="sidebarHead" href="account.php?section=vids&id='. $_GET['id'] .'">Your Videos</a> <br>';
+								echo '<a id="sidebarHead" href="account.php?section=sub&id='. $_GET['id'] .'">Your Subscriptions</a> <br>';
+								echo '<a id="sidebarHead" href="account.php?section=play&id='. $_GET['id'] .'">Your Playlists</a> <br>';
+								echo '<a id="sidebarHead" href="account.php?section=msg&id='. $_GET['id'] .'">Messages</a> <br>';
+								echo '<a id="sidebarHead" href="account.php?section=set&id='. $_GET['id'] .'">Account Settings</a> <br>';
 							}
 						?>
 						
@@ -74,6 +75,100 @@
 				</tr>
 			</table>
 		</div>
+		
+		<div id="accountContent">
+			<?php
+			
+			if (!isset($_GET['section']) || ($_SESSION['accountID'] != $_GET['id'])) {
+				if (isset($_SESSION['accountID']) && $_SESSION['accountID'] == $_GET['id']) {
+					echo "<label id='heading'>Your Dashboard</label> <br>";
+				} else {
+					echo "<label id='heading'> Welcome to ";
+					getAccountName($_GET['id']);
+					echo "s channel</label> <br>";
+					
+					if (isset($_SESSION['accountID']) AND !empty($_SESSION['accountID'])) {
+						if (checkIfSubbed($_GET['id']) == 1) {
+							echo "<form method='post'>
+									<input type='submit' name='unsubscribe' id='subscribe' value='Unsubscribe' /> <a id='messageLink' href='account.php?id=". $_SESSION['accountID'] ."&section=send&to=". $_GET['id'] ."'>Send A Message</a><br/>
+								</form>";
+								
+							if (isset($_POST['unsubscribe'])) {
+								unsubscribe($_GET['id']);
+							}
+						} else {
+							echo "<form method='post'>
+									<input type='submit' name='subscribe' id='subscribe' value='Subscribe' /> <a id='messageLink' href='account.php?id=". $_SESSION['accountID'] ."&section=send&to=". $_GET['id'] ."'>Send A Message</a><br/>
+								</form>";
+								
+							if (isset($_POST['subscribe'])) {
+								subscribe($_GET['id']);
+							}
+
+						}
+					}
+				}
+				
+				echo "<br><label id='heading'>Videos</label><br>";
+				displayList('', '', $_GET['id'], 5);
+			} else {
+				if ($_GET['section'] == "vids") {
+					echo "<label id='heading'>Your Videos</label><br>";
+					mediaSettings();
+					
+				} elseif ($_GET['section'] == "sub") {
+					echo "<label id='heading'>Your subscriptions</label><br>";
+					showSubscribers();
+					
+				} elseif ($_GET['section'] == "play") {
+					echo "<label id='heading'>Your playlists</label>";
+					echo "<a id='linkButton' href='account.php?section=addtoplay&id=". $_GET['id'] ."'>Create A Playlist</a> <br>";
+					getplaylistandLinks($_SESSION['accountID']);
+					
+				} elseif ($_GET['section'] == "msg") {
+				 	echo "<label id='heading'>Messages</label><br>";
+					displayCurrentConversations();
+					
+				}elseif ($_GET['section'] == "send") {
+					echo "<label id='heading'>Currently Messaging:";getAccountName($_GET['to']);echo "</label><br>";
+					displayMessages($_GET['to']);
+					echo "<br><br><form method='post'>
+						  <textarea name='msg' rows='5' cols='50'></textarea>
+						  <br>
+						  <input type='submit' name='sendmsg' value='Send Message'>
+						</form>";
+						
+					if (isset($_POST['sendmsg'])) {
+						sendMessage($_GET['to'], $_POST['msg']);
+					}
+						
+				} elseif ($_GET['section'] == "set") {
+					echo "<label id='heading'>Account Settings</label><br>";
+					accSettings();
+					
+				} elseif ($_GET['section'] == "addtoplay") {
+					echo "	<label id='heading'>Create A Playlist</label><br>
+							<div id='createplayCont'>
+								<label id='subtitle'>Enter a Title for your new playlist.</label>
+								<form id='playtitleForm' method='post'>
+									<input type='text' id='playTitleValInput'  name='titleVal'><input type='submit' name='addPlaylist' value='addPlaylist' id='addButton'>
+								</form>
+							</div>
+					";
+					
+					if (isset($_POST['addPlaylist'])) {
+						$result = $_POST['titleVal'];
+						createPlaylist($_SESSION['accountID'], $result);
+					}
+					
+				} else {
+					echo "<label id='heading'>You shouldn't be here</label><br>";
+				}
+			}
+			?>
+		</div>
+		
+		
 	</div>
 </body>
 

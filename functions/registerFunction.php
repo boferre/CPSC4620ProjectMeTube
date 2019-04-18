@@ -49,6 +49,12 @@ function check() {
 			echo "<span class='warning' id='warning'>Your security Answer cannot have: ;, ), /, - </span>";
 			return true;
 		}
+		
+		
+		if (empty($_REQUEST['password'])) {
+			echo "<span class='warning' id='warning'>Your password cannot be empty!</span>";
+			return true;
+		}
 	}
 	
 	return false;
@@ -68,10 +74,8 @@ function accountCheck($value) {
 }
 
 
-function hashuser() {
-	$hashedVariable = "";
-	$variable = "";
-	$key = $_REQUEST['password'];
+function hashuser($value) {
+	$hashedVariable = md5($value);
 	
 	return $hashedVariable;
 }
@@ -88,14 +92,24 @@ function register() {
 	
 	// Get required variables;
 	// Determine Account ID
-	$sql = "SELECT COUNT(accountID) FROM account;";
+	$sql = "SELECT MAX(accountID) FROM account;";
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 	
-	$accountID = $row['COUNT(accountID)'] + 1;
+	$accountID = $row['MAX(accountID)'] + 1;
 	
 	// Get other variables
-	$username = mysqli_real_escape_string($conn, $_REQUEST['email']);
+	$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+	$pass = mysqli_real_escape_string($conn, $_REQUEST['password']);
+	$passconfim = mysqli_real_escape_string($conn, $_REQUEST['passwordComp']);
+	
+	if (strcmp($pass, $passconfim) == 0) {
+		$username = hashuser($email.$pass);
+	} else {
+		echo "<span class='warning' id='warning'>Your password confirmation does not match!</span>";
+		return;
+	}
+	
 	$displayname = mysqli_real_escape_string($conn, $_REQUEST['dName']);
 	$Fname = mysqli_real_escape_string($conn, $_REQUEST['fName']);
 	$Lname = mysqli_real_escape_string($conn, $_REQUEST['lName']);
