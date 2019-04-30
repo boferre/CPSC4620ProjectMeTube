@@ -32,6 +32,7 @@
 					if (isset($_POST['search'])) {
 						$result = $_POST['searchVal'];
 						search($result);
+						unset($_POST['search']);
 					}
 				?>
 			</span>
@@ -95,6 +96,7 @@
 								
 							if (isset($_POST['unsubscribe'])) {
 								unsubscribe($_GET['id']);
+								unset($_POST['unsubscribe']);
 							}
 						} else {
 							echo "<form method='post'>
@@ -103,6 +105,7 @@
 								
 							if (isset($_POST['subscribe'])) {
 								subscribe($_GET['id']);
+								unset($_POST['subscribe']);
 							}
 
 						}
@@ -140,6 +143,7 @@
 						
 					if (isset($_POST['sendmsg'])) {
 						sendMessage($_GET['to'], $_POST['msg']);
+						unset($_POST['sendmsg']);
 					}
 						
 				} elseif ($_GET['section'] == "set") {
@@ -159,8 +163,11 @@
 					if (isset($_POST['addPlaylist'])) {
 						$result = $_POST['titleVal'];
 						createPlaylist($_SESSION['accountID'], $result);
+						unset($_POST['addPlaylist']);
 					}
 					
+				}elseif ($_GET['section'] == "passchange") {
+					passChange();
 				} else {
 					echo "<label id='heading'>You shouldn't be here</label><br>";
 				}

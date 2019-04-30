@@ -63,7 +63,17 @@ function check() {
 
 function accountCheck($value) {
 	include 'server.php';
+	
+	$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+	
 	$sql = "SELECT username FROM account WHERE username='$value';";
+	$result = $conn->query($sql);
+	
+	if ($result->num_rows > 0) {
+			return true;
+	}
+	
+	$sql = "SELECT username FROM account WHERE username LIKE '$email%';";
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows > 0) {
@@ -104,7 +114,7 @@ function register() {
 	$passconfim = mysqli_real_escape_string($conn, $_REQUEST['passwordComp']);
 	
 	if (strcmp($pass, $passconfim) == 0) {
-		$username = hashuser($email.$pass);
+		$username = $email.hashuser($pass);
 	} else {
 		echo "<span class='warning' id='warning'>Your password confirmation does not match!</span>";
 		return;

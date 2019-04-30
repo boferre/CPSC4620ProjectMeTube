@@ -18,14 +18,9 @@
 	function getPlayList($acc) {
 		include 'server.php';
 		
-		$sql = "SELECT title, ListID FROM playlist WHERE accountID=$acc;";
+		$sql = "SELECT title FROM playlist WHERE title='Favorites' AND accountID=$acc;";
 		$result = $conn->query($sql);
-		
-		if ($result->num_rows > 0) {
-			while(($row = $result->fetch_assoc())) {
-				echo "<option value='functions/addToPlaylist.php?list=". $row['ListID'] ."&media=". $_GET['media'] ."'>" . $row['title'] . "</option>";
-			}
-		} else {
+		if ($result->num_rows <= 0) {
 			$sql = "SELECT COUNT(ListID) FROM playlist;";
 			$result = $conn->query($sql);
 			$row = $result->fetch_assoc();
@@ -33,7 +28,15 @@
 			
 			$insertSQL = "INSERT INTO playlist VALUES($count, $acc , 'Favorites');";
 			$result = $conn->query($insertSQL);
-			echo "<option value='functions/addToPlaylist.php?list=$count&media=". $_GET['media'] ."'>Favorites</option>";
+		}
+		
+		$sql = "SELECT title, ListID FROM playlist WHERE accountID=$acc;";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			while(($row = $result->fetch_assoc())) {
+				echo "<option value='functions/addToPlaylist.php?list=". $row['ListID'] ."&media=". $_GET['media'] ."'>" . $row['title'] . "</option>";
+			}
 		}
 		
 	}
@@ -54,9 +57,9 @@
 							";
 							
 				if (isset($_POST['rmvPlaylist'])) {
-					echo "test";
 					$data = $_POST['rmvPlaylist'];
 					deletePlaylist($data);
+					unset($_POST['rmvPlaylist']);
 				}
 				
 				$sql = "SELECT mediaLink FROM playlistLinks WHERE ListID=" . $row['ListID'] .";";
@@ -75,6 +78,7 @@
 						if (isset($_POST['rmvFromPlay'])) {
 							$data = $_POST['rmvFromPlay'];
 							rmvFromPlaylist($data, $listID);
+							unset($_POST['rmvFromPlay']);
 						}
 
 						echo "</div>";
@@ -372,12 +376,13 @@
 				<label id='subHead'>Your Account ID: ". $row['accountID'] ."</label><br>
 				<label id='subHead'>In total, your views for all videos is: $totalViews</label><br>
 				<label id='subHead'>Your Display Name: </label><input type='text' name='displayname' value='". $row['displayname'] ."'><br>
-				<input type='submit' name='submitChanges' value='Submit Changes'>
+				<input type='submit' name='submitChanges' value='Submit Changes'><input type='submit' name='changePassword' value='Change Password'>
 			</form>
 		
 		";
 		
 		if (isset($_POST['submitChanges'])) {
+			unset($_POST['submitChanges']);
 			$newDisplay = $_POST['displayname'];
 			
 			$sql = "UPDATE account SET displayname='$newDisplay' WHERE accountID=$usr";
@@ -385,8 +390,57 @@
 			$_SESSION["displayname"] = $newDisplay;
 			header("Refresh:1");
 			echo "<label id='alert'>Changes submitted and made! Refreshing now.</label>";
+		} elseif (isset($_POST['changePassword'])) {
+			unset($_POST['changePassword']);
+			header("Location: account.php?section=passchange&id=". $_SESSION["accountID"]);
 		}
 		
+	}
+	
+	
+	function passChange() {
+		include 'registerFunction.php';
+		include 'server.php';
+		
+		echo "<label id='heading'>Change Your Password</label><br>
+			  <label id='alert'>Please enter your email, old password, and new password.</label>
+		";
+		echo "
+			<form method='post'>
+				<div class='regCont' id='emailCont'><span class='heading' id='emailHead'>Email</span> 
+					<input type='text' id='emailInput' name='email' placeholder='Enter Email' maxlength='35'></div>
+				<div class='regCont' id='passCont'><span class='heading' id='passHead'>Your Old Password</span> 
+					<input type='password' id='passInput' name='oldpassword' placeholder='Enter Old Password' maxlength='15'> 
+				<div class='regCont' id='passCont'><span class='heading' id='passHead'>Your New Password</span> 
+					<input type='password' id='passInput' name='newpassword' placeholder='Enter New Password' maxlength='15'>
+				<br><input type='submit' name='passchange' value='Change Password'>
+			</form><br><br>
+		";
+		
+		if (isset($_POST['passchange'])) {
+			$email = mysqli_real_escape_string($conn, $_POST['email']);
+			$oldpass = mysqli_real_escape_string($conn, $_POST['oldpassword']);
+			$newpass = mysqli_real_escape_string($conn, $_POST['newpassword']);
+			
+			$value = $email . hashuser($oldpass);
+			$id = $_SESSION['accountID'];
+			
+			
+			$sql = "SELECT * FROM account WHERE username='$value' AND accountID=$id;";
+			$result = $conn->query($sql);
+			
+			if ($result->num_rows > 0) {
+				$newvalue = $email . hashuser($newpass);
+				$sql = "UPDATE account SET username='$newvalue' WHERE accountID=$id;";
+				$result = $conn->query($sql);
+				
+				echo "<label id='alert'>Your password has been changed, the effects will take place once you log in again.</label>";
+			} else {
+				echo "<label id='alert'>The email or old password doesnt match any accounts! Try again.</label>";
+			}
+			
+			unset($_POST['passchange']);
+		}
 	}
 	
 	

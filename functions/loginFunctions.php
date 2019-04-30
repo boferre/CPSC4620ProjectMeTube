@@ -32,7 +32,7 @@ function login() {
 	$username = mysqli_real_escape_string($conn, $_REQUEST['email']);
 	$password = mysqli_real_escape_string($conn, $_REQUEST['password']);
 	
-	$username = hashuser($username.$password);
+	$username = $username.hashuser($password);
 	
 	// Get information.
 	$sql = "SELECT accountID, displayname FROM account WHERE username='$username'";
@@ -47,7 +47,7 @@ function login() {
 		$_SESSION["accountID"] = $row['accountID'];
 		$_SESSION["displayname"] = $row['displayname'];
 		echo "<span class='warning' id='warning'>Welcome " .$_SESSION['displayname'] . "! Redirecting you to the home page.</span>";
-		echo "<meta http-equiv='refresh' content='4;url=http://webapp.cs.clemson.edu/~boferre/metube/index.php' />";
+		echo "<meta http-equiv='refresh' content='3;url=http://webapp.cs.clemson.edu/~boferre/metube/index.php' />";
 		
 		
 	} else {

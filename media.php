@@ -15,7 +15,6 @@
 	include 'functions/mediaDisplayFunctions.php';
 	include 'functions/searchFunction.php';
 	include 'functions/accountManagementFunctions.php';
-	chmod('/uploads/*', 0755);
 ?>
 
 
@@ -64,6 +63,10 @@
 				if (isset($_POST['subscribe'])) {
 					subscribe($_POST['idLogged']);
 					unset($_POST['subscribe']);
+				}
+				
+				if (isset($_POST['downloadFile'])) { 
+					downloadFile($mediaId);
 				}
 			?>
 		</div>

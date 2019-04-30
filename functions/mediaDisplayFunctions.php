@@ -117,10 +117,6 @@
 									<option value=''>Add To PlayList</option>
 					";
 					
-					 if (isset($_POST['downloadFile'])) {
-						downloadFile($imageLink, $row['accountID']);
-					 }
-					
 					getPlayList($_SESSION['accountID']);
 					
 					echo "
@@ -165,17 +161,27 @@
 	}
 
 	
-	function downloadFile($file, $acc) {
-		echo $file;
-		header('Content-Description: File Transfer');
-		header('Content-Type: image/jpeg');
-		header('Content-Disposition: attachment; filename='. $file);
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate');
-		header('Pragma: public');
-		header('Content-Length: ' . filesize($file));
-		readfile($file);
-		exit;
+	function downloadFile($mediaID) {
+		include 'server.php';
+		
+		$sql = "SELECT accountID, link, type FROM media WHERE mediaID=$mediaID;";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		
+		ob_end_clean();
+		$path = $row['link'];
+		  
+		header("Content-Type: application/octet-stream");
+		header("Content-Length: ".(string)(filesize($path)));
+		header("Content-Disposition: inline; filename=download.". $row['type']);
+		  
+		if ($file = fopen($path, 'rb')) {
+			while(!feof($file) and (connection_status()==0)) {
+				print(fread($file, 1024*8));
+				flush();
+			}
+			fclose($file);
+		}
 	}
 	
 	
